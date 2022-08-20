@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script>
+
+    function updateTopicsByLevel() {
+        let topics = "[[${topics}]]";
+        $.post("/TestController/getTopicsByLevel/" + id);
+        // let filtered = topics. (function(x) { return x.level === "A2"; });
+        console.log(topics);
+    }
+</script>
+<select class="form-select form-select-sm" aria-label=".form-select-sm example" th:field="*{levels}" onclick="updateTopicsByLevel()">
+    <option th:each="level: ${levels}" th:value="${level.ordinal}" th:text="${level.name}"></option>
+</select>
+
+<select class="form-select form-select-sm" aria-label=".form-select-sm example" th:field="*{topics}">
+    <option th:each="topic: ${topics}" th:value="${topic.id}" th:text="${topic.name}"></option>
+</select>
+
+<select class="form-select form-select-sm" aria-label=".form-select-sm example" th:field="*{subtopics}">
+    <option th:each="subtopic: ${subtopics}" th:value="${subtopic.id}" th:text="${subtopic.name}"></option>
+</select>
+
+<tr th:each="test: ${tests}">
+    <td th:text="${test.question}" />
+    <td th:text="${test.subtopic.name}" /><br>
+</tr>
+</body>
+</html>
