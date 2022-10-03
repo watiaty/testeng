@@ -2,18 +2,16 @@ package pl.watiaty.testeng.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import pl.watiaty.testeng.entity.Level;
-import pl.watiaty.testeng.entity.Subtopic;
-import pl.watiaty.testeng.entity.Test;
-import pl.watiaty.testeng.entity.Topic;
 import pl.watiaty.testeng.service.SubTopicServiceImpl;
 import pl.watiaty.testeng.service.TestServiceImpl;
 import pl.watiaty.testeng.service.TopicServiceImpl;
 
 import java.util.Arrays;
-import java.util.List;
 
 @Controller
 @EnableWebMvc
