@@ -1,10 +1,10 @@
 package pl.watiaty.testeng.service;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.watiaty.testeng.entity.Test;
+import pl.watiaty.testeng.repository.SubTopicRepository;
 import pl.watiaty.testeng.repository.TestRepository;
 
 import java.util.List;
@@ -14,9 +14,11 @@ import static pl.watiaty.testeng.constants.Constants.ENTITY_ON_PAGE;
 @Service
 public class TestServiceImpl implements TestService {
     private final TestRepository testRepository;
+    private final SubTopicRepository subTopicRepository;
 
-    public TestServiceImpl(TestRepository testRepository) {
+    public TestServiceImpl(TestRepository testRepository, SubTopicRepository subTopicRepository) {
         this.testRepository = testRepository;
+        this.subTopicRepository = subTopicRepository;
     }
 
 
@@ -26,8 +28,8 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public Page<Test> findBySubtopic(Integer page, String subtopic) {
-        return null;
+    public List<Test> findBySubtopicId(Long subtopic) {
+        return testRepository.findAllBySubtopic(subTopicRepository.findById(subtopic).get());
     }
 
     @Override

@@ -7,4 +7,6 @@ import java.util.List;
 public interface SubTopicService {
     List<Subtopic> findAll();
     List<Subtopic> findByTopic(Long id);
+
+    Subtopic findById(Long id);
 }

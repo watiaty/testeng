@@ -8,7 +8,7 @@ import java.util.List;
 public interface TestService {
     List<Test> findAll();
 
-    Page<Test> findBySubtopic(Integer page, String subtopic);
+    List<Test> findBySubtopicId(Long subtopic);
 
     boolean save(Test test);
 

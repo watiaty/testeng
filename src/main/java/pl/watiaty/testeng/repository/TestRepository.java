@@ -6,7 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import pl.watiaty.testeng.entity.Subtopic;
 import pl.watiaty.testeng.entity.Test;
 
+import java.util.List;
+
 public interface TestRepository extends JpaRepository<Test, Long> {
     Page<Test> findAll(Pageable pageable);
-    Page<Test> findAllBySubtopic(Pageable pageable, Subtopic subtopic);
+    List<Test> findAllBySubtopic(Subtopic subtopic);
 }

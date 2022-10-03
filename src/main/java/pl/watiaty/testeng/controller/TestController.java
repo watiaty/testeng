@@ -2,10 +2,7 @@ package pl.watiaty.testeng.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import pl.watiaty.testeng.entity.Level;
 import pl.watiaty.testeng.entity.Subtopic;
@@ -32,28 +29,19 @@ public class TestController {
         this.subTopicService = subTopicService;
     }
 
-    @RequestMapping(value = "/api/tests", method = RequestMethod.GET)
-    public List<Test> findAll() {
-        return testService.findAll();
+    @GetMapping("test")
+    public String getStartOptions(Model model) {
+        model.addAttribute("topics", topicService.findAll());
+        model.addAttribute("subtopics", subTopicService.findAll());
+        model.addAttribute("levels", Arrays.stream(Level.values()).toList());
+        return "test";
     }
 
-    @RequestMapping(value = "/api/topics", method = RequestMethod.GET)
-    public List<Topic> findAllTopics() {
-        return topicService.findAll();
+    @PostMapping("test/start")
+    public String getTests(@RequestParam(value = "subtopic") Long subtopic) {
+        System.out.println(testService.findBySubtopicId(subtopic));
+        return "test";
     }
 
-    @RequestMapping(value = "/api/subtopics", method = RequestMethod.GET)
-    public List<Subtopic> findAllSubTopics() {
-        return subTopicService.findAll();
-    }
 
-    @RequestMapping(value = "/api/levels", method = RequestMethod.GET)
-    public List<Level> findAllLevel() {
-        return Arrays.stream(Level.values()).toList();
-    }
-
-    @RequestMapping(value = "/api/tests/level/{id}", method = RequestMethod.GET)
-    public List<Topic> getTopicsByLevel(Long id) {
-        return topicService.findByLevel(id);
-    }
 }

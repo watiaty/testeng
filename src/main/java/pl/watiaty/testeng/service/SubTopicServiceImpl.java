@@ -20,6 +20,11 @@ public class SubTopicServiceImpl implements SubTopicService {
     }
 
     @Override
+    public Subtopic findById(Long id) {
+        return subTopicRepository.findById(id).get();
+    }
+
+    @Override
     public List<Subtopic> findByTopic(Long id) {
         return subTopicRepository.findAllByTopicId(id);
     }
