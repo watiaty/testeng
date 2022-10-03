@@ -29,15 +29,15 @@ public class TestController {
         this.subTopicService = subTopicService;
     }
 
-    @GetMapping("test")
+    @GetMapping("home")
     public String getStartOptions(Model model) {
         model.addAttribute("topics", topicService.findAll());
         model.addAttribute("subtopics", subTopicService.findAll());
         model.addAttribute("levels", Arrays.stream(Level.values()).toList());
-        return "test";
+        return "home";
     }
 
-    @PostMapping("test/start")
+    @PostMapping("test")
     public String getTests(@RequestParam(value = "subtopic") Long subtopic) {
         System.out.println(testService.findBySubtopicId(subtopic));
         return "test";

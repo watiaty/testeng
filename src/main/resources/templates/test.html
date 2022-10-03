@@ -5,66 +5,7 @@
 </head>
 <body>
 <header th:insert="fragments/common.html"> </header>
-<script>
 
-    function updateTopics() {
-        let level = document.getElementById("selectLevels").value;
-        let topics = document.getElementById("selectTopics");
-
-        topics = topics.getElementsByTagName("option")
-
-
-        for (let i = 0; i < topics.length; i++) {
-
-            if (topics.item(i).getAttribute("value2") !== level) {
-                topics.item(i).setAttribute("hidden", "true");
-            } else {
-                topics.item(i).removeAttribute("hidden");
-            }
-        }
-    }
-
-    function updateSubTopics() {
-        let topic = document.getElementById("selectTopics").value;
-        let subtopics = document.getElementById("selectSubTopics");
-        subtopics = subtopics.getElementsByTagName("option")
-
-
-        for (let i = 0; i < subtopics.length; i++) {
-            console.log(topic.value)
-            if (subtopics.item(i).getAttribute("value2") !== topic) {
-                subtopics.item(i).setAttribute("hidden", "true");
-            } else {
-                subtopics.item(i).removeAttribute("hidden");
-            }
-        }
-    }
-
-    function updateResult() {
-        document.getElementById("result").value = document.getElementById("selectSubTopics").value;
-    }
-
-</script>
-<form action="#" th:action="@{/test/start}" method="post">
-    <select class="form-select form-select-sm" aria-label=".form-select-sm example"
-            th:id="selectLevels" onchange="updateTopics()">
-        <option th:each="level: ${levels}" th:value="${level.name}" th:text="${level.name}"></option>
-    </select>
-
-    <select class="form-select form-select-sm" aria-label=".form-select-sm example"
-            th:id="selectTopics" onchange="updateSubTopics()">
-        <option th:each="topic: ${topics}" th:value="${topic.id}" th:text="${topic.name}"
-                th:value2="${topic.level}"></option>
-    </select>
-
-    <select class="form-select form-select-sm" aria-label=".form-select-sm example"
-            th:id="selectSubTopics" onchange="updateResult()">
-        <option th:each="subtopic: ${subtopics}" th:value="${subtopic.id}" th:value2="${subtopic.topic.id}"
-                th:text="${subtopic.name}"></option>
-    </select>
-    <input type="hidden" id="result" name="subtopic" value="">
-    <input type="submit" value="Start test" />
-</form>
 
 <tr th:each="test: ${tests}">
     <td th:text="${test.question}"/>
