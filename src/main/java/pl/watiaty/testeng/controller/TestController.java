@@ -44,8 +44,6 @@ public class TestController {
     @PostMapping("test")
     public String getTests(@RequestParam(value = "subtopic") Long subtopic, Model model) {
         List<Test> tests = testService.findBySubtopicId(subtopic);
-        model.addAttribute("tests", tests);
-        System.out.println(answerService.findByTestsId(tests.stream().map(Test::getId).collect(Collectors.toList())));
         model.addAttribute("answers", answerService.findByTestsId(tests.stream().map(Test::getId).collect(Collectors.toList())));
         return "test";
     }
