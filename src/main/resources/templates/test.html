@@ -1,15 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:tH="http://www.w3.org/1999/xhtml">
 <head>
     <title>Test</title>
 </head>
 <body>
-<header th:insert="fragments/common.html"> </header>
+<header th:insert="fragments/common.html"></header>
 
 
 <tr th:each="test: ${tests}">
     <td th:text="${test.question}"/>
-    <td th:text="${test.subtopic.name}"/>
+    <div th:each="answer: ${answers}">
+        <div class="form-check" th:if="${test.id == answer.test.id}">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" th:id="${test.id}">
+            <label class="form-check-label" th:for="${test.id}" th:text="${answer.answer}">
+
+            </label>
+        </div>
+
+    </div>
     <br>
 </tr>
 </body>
